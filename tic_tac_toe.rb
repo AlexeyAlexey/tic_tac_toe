@@ -73,7 +73,7 @@ class TicTacToe
     @number_of_moves == @dimension**2
   end
 
-  def square
+  def board
     @board.map{ |row| row.map{|el| USERS[el]} }
   end
   
@@ -101,15 +101,16 @@ class TicTacToe
     end
 end
 
+#####################################################
 #ruby tic_tac_toe.rb
-print "Set dimension (integer) NxN: \n"
+print "Set dimension (integer) NxN: "
 dimension = gets.chomp.to_i
 
 print "Who first 'X' or '0': "
 first = gets.chomp
 
 tic_tac_toe = TicTacToe.new(dimension, first)
-tic_tac_toe.square.each { |row| print "#{row.map{|el| el}.join(", ")} \n" }
+tic_tac_toe.board.each { |row| print "#{row.map{|el| el}.join(", ")} \n" }
 
 print "Who move #{tic_tac_toe.who_moves} \n"
 loop do
@@ -122,7 +123,7 @@ loop do
     puts "=========== Who win: #{tic_tac_toe.who_win} ==========="
   end
 
-  tic_tac_toe.square.each { |row| print "#{row.map{|el| el}.join(", ")} \n" }
+  tic_tac_toe.board.each { |row| print "#{row.map{|el| el}.join(", ")} \n" }
   
   tic_tac_toe.win? || tic_tac_toe.game_over? ? break : (print "Who move #{tic_tac_toe.who_moves} \n")
 end
