@@ -43,7 +43,7 @@ class TicTacToe
 
       @rows[i][0] += @current_user
       @rows[i][1] += 1
-      
+
       @columns[j][0] += @current_user
       @columns[j][1] += 1
 
@@ -76,7 +76,7 @@ class TicTacToe
   end
 
   def who_win
-    USERS[@current_user]
+    @win ? USERS[@current_user] : "No one"
   end
 
   def win? 
@@ -144,7 +144,8 @@ loop do
   end
 
   if tic_tac_toe.game_over?
-    print "Who move #{tic_tac_toe.who_moves} \n"
+    print "Game Over \n"
+    puts "=========== Who win: #{tic_tac_toe.who_win} ==========="
     break
   end
 
