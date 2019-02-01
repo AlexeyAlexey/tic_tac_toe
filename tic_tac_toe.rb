@@ -12,15 +12,24 @@ class TicTacToe
     @board = Array.new(@dimension) {Array.new(@dimension, 0)} #[ [0, 0, ...], [0, 0, ...], ...]
     @size = @dimension - 1
     
-    #[[sum, count], ...] each element is sum of elements from column
+    #[[sum, amount], ...] each element is sum of elements from column
+    #sum is sum of elements from column
+    #amount is amount of filled elements in a column
     @columns = Array.new(@dimension) {[0, 0]} #[ [[0, 0], [0, 0], ...], [[0, 0], [0, 0], ...], ...]
 
-    #[[sum, count], ...] each element is sum of elements from row
+    #[[sum, amount], ...]
+    #sum is sum of elements from row
+    #amount is amount of filled elements in a row
     @rows    = Array.new(@dimension) {[0, 0]} #[ [[0, 0], [0, 0], ...], [[0, 0], [0, 0], ...], ...]
     
-    #it is sum of elements from diagonal (left to right 0,0 -> @size, @size) 
+    #left diagonal (left to right 0,0 -> @size, @size) 
+    #sum is sum of elements from diagonal
+    #amount is amount of filled elements in a diagonal
     @left  = [0, 0]
-    #it is sum of elements from diagonal (right to left 0,@size -> @size,0) 
+
+    #right diagonal (right to left 0,@size -> @size,0) 
+    #sum is sum of elements from diagonal
+    #amount is amount of filled elements in a diagonal
     @right = [0, 0]
 
     @number_of_moves = 0
@@ -34,6 +43,7 @@ class TicTacToe
 
       @rows[i][0] += @current_user
       @rows[i][1] += 1
+      
       @columns[j][0] += @current_user
       @columns[j][1] += 1
 
