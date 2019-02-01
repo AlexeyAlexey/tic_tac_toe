@@ -25,6 +25,8 @@ class TicTacToe
 
     @number_of_moves = 0
 
+    @const_game_over = @dimension**2
+
     @win = false
   end
 
@@ -70,7 +72,7 @@ class TicTacToe
   end
 
   def game_over?
-    @number_of_moves == @dimension**2
+    @number_of_moves == @const_game_over
   end
 
   def board
