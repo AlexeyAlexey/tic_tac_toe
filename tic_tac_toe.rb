@@ -3,6 +3,7 @@ class TicTacToe
   # j is column
   # You could replace 3 with "0".bytes[0] 
   # You could replace 2 with "X".bytes[0]
+  # You could use "_".bytes[0] instead of 0
   USERS = {"X" => 2, "x" => 2, "0" => 3, 2 => "X", 3 => "0", 0 => "_" }
 
   def initialize(dimension, who_first = "0")
