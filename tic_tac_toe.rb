@@ -11,7 +11,7 @@ class TicTacToe
     @current_user = USERS[who_first]
     @current_user_bytes = current_user_bytes #@current_user.bytes[0]
 
-    @board = Array.new(@dimension) {Array.new(@dimension, "_")} #[ [0, 0, ...], [0, 0, ...], ...]
+    @board = Array.new(@dimension) {Array.new(@dimension, "_")} #[ ["_", "_", ...], ["_", "_", ...], ...]
     @size = @dimension - 1
     
     #[[sum, amount], ...] each element is sum of elements from column
