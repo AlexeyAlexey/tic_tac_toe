@@ -4,13 +4,14 @@ class TicTacToe
   # You could replace 3 with "0".bytes[0] 
   # You could replace 2 with "X".bytes[0]
   # You could use "_".bytes[0] instead of 0
-  USERS = {"X" => 2, "x" => 2, "0" => 3, 2 => "X", 3 => "0", 0 => "_" }
+  USERS = {"X" => "X", "x" => "X", "0" => "0", "_" => "_" }
 
   def initialize(dimension, who_first = "0")
     @dimension = dimension
     @current_user = USERS[who_first]
+    @current_user_bytes = current_user_bytes #@current_user.bytes[0]
 
-    @board = Array.new(@dimension) {Array.new(@dimension, 0)} #[ [0, 0, ...], [0, 0, ...], ...]
+    @board = Array.new(@dimension) {Array.new(@dimension, "_")} #[ [0, 0, ...], [0, 0, ...], ...]
     @size = @dimension - 1
     
     #[[sum, amount], ...] each element is sum of elements from column
@@ -40,21 +41,23 @@ class TicTacToe
 
   def set(i, j)
     if !@win && can_be_set?(i, j)
+      @current_user_bytes = current_user_bytes
+
       @board[i][j] = @current_user
 
-      @rows[i][0] += @current_user
+      @rows[i][0] += @current_user_bytes
       @rows[i][1] += 1
 
-      @columns[j][0] += @current_user
+      @columns[j][0] += @current_user_bytes
       @columns[j][1] += 1
 
       if right?(i, j)
-        @right[0] += @current_user
+        @right[0] += @current_user_bytes
         @right[1] += 1
       end
 
       if left?(i, j)
-        @left[0] += @current_user
+        @left[0] += @current_user_bytes
         @left[1] += 1
       end
 
@@ -64,7 +67,7 @@ class TicTacToe
         @win = true
         return @win
       else
-        @current_user = @current_user == 2 ? 3 : 2
+        @current_user = @current_user == "0" ? "X" : "0"
         return false
       end
     end
@@ -73,11 +76,11 @@ class TicTacToe
   end
 
   def who_moves
-    USERS[@current_user]
+    @current_user
   end
 
   def who_win
-    @win ? USERS[@current_user] : "No one"
+    @win ? @current_user : "No one"
   end
 
   def win? 
@@ -89,13 +92,13 @@ class TicTacToe
   end
 
   def board
-    @board.map{ |row| row.map{|el| USERS[el]} }
+    @board
   end
   
   private
   
     def check_if_win?(i, j)
-      sum_mast_be = @current_user*@dimension
+      sum_mast_be = current_user_bytes*@dimension
       filled_amount_mast_be = @dimension
 
       @rows[i][1] == filled_amount_mast_be && @rows[i][0] == sum_mast_be || 
@@ -105,7 +108,7 @@ class TicTacToe
     end
     
     def can_be_set?(i, j)
-      @board[i][j] == 0
+      @board[i][j] == "_"
     end
     
     def right?(i, check_it)
@@ -114,6 +117,10 @@ class TicTacToe
 
     def left?(i, check_it)
       i - check_it == 0
+    end
+
+    def current_user_bytes 
+      @current_user.bytes[0]
     end
 end
 
